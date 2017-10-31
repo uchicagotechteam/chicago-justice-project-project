@@ -163,6 +163,11 @@
         self.whereClause = self.locationColumn + " not equal to ''";
         
         //-----custom filters-----
+        var type_column = "'Domestic'";
+        var tempWhereClause = [];
+        if ( $("#domestic-assault").is(':checked')) tempWhereClause.push("true");
+        if ( $("#non-domestic-assault").is(':checked')) tempWhereClause.push("false");
+        self.whereClause += " AND " + type_column + " IN ('" + tempWhereClause.join("','") + "')";
         //-----end of custom filters-----
 
         self.getgeoCondition(address, function (geoCondition) {
