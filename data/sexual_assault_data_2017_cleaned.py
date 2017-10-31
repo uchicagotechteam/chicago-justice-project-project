@@ -1,18 +1,20 @@
 # Cleaning sexual_assault_data_2017
 #
-# Date: October 24, 2017
+# Date: October 31, 2017
 
 
 import json
 
-d = {}
 
-with open('result.json', 'w') as json_file:
+with open('sexual_assault_data_2017.json', 'w') as json_file:
     json_data = json.load(json_file)
     # Get only the stats (list of lists)
     data = json_data["data"]
+    l = []
     # Iterate through each list
     for i in data:
+        d = {}
+
     	[ID, CASE_NUMBER, DATE, BLOCK, IUCR, PRIMARY_IUCR, ARREST, DOMESTIC,\
     	DISTRICT, WARD, COMMUNITY_AREA, FBI_CODE, X_COORDINATE, Y_COORDINATE, YEAR, LATITUDE,\
     	LONGITUDE, LOCATION]\
@@ -35,8 +37,9 @@ with open('result.json', 'w') as json_file:
         d[LATITUDE] = i[LATITUDE]
         d[LONGITUDE] = i[LONGITUDE]
         d[LOCATION] = i[LOCATION]
+        l.append(d)
 
-        return d
+    return l
 
 
 
