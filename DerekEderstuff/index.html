@@ -3,6 +3,7 @@
   <head>
     <title>Searchable Map Template Demo</title>
     <meta charset='utf-8' />
+    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta content='' name='description' />
     <meta content='' name='author' />
@@ -95,6 +96,26 @@
               <p>Please enable JavaScript to view the map.</p>
             </div>
           </noscript>
+
+          <!-----------------------------TEST-------------------------------------------- -->
+              <svg width="160" height="180">
+                <rect x="30" width="20" fill="steelblue"></rect>
+                <rect x="55" width="20" fill="steelblue"></rect>
+                <rect x="80" width="20" fill="steelblue"></rect>
+                <rect x="105" width="20" fill="steelblue"></rect>
+              </svg>
+              <script>
+                <!-- Our D3 code will go here. -->
+                var ratData = [ 40, 90, 30, 60 ];
+
+                d3.selectAll( "rect" )
+                  .data( ratData )
+                  .attr( "height", function(d){
+                    return d;
+                  });
+              </script> 
+          <!----------------------------TEST--------------------------------------------- -->
+
           <div id='map_canvas'></div>
           <p class='pull-right'>
             <a href='http://derekeder.com/searchable_map_template/'>Searchable Map Template</a> by <a href='http://derekeder.com'>Derek Eder</a>.
