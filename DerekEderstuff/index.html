@@ -14,6 +14,13 @@
     <!--[if lt IE 9]>
       <script type="text/javascript" src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="jquery.js"></script>
+    <script>
+    $(function(){
+      $("#includedContent").load("iframe_test.html");
+      $("#includedContent2").load("map_insert_test.html");
+    });
+    </script>
   </head>
   <body>
     <div class='navbar navbar-default navbar-static-top'>
@@ -39,6 +46,7 @@
         <div class='col-md-4'>
           <p>Chicago's news organizations report on the crime that takes place there, but the news reporting doesn't always accurately represent crime rate. See how their reporting compares to the actual crime distribution in the maps below.
           DISCLAIMER: This is very much a work in progress at this point.</p>
+
           <div class='well'>
             <h4>
               Address <small>(<a id='find_me' href='#'>find me</a>)</small>
@@ -97,23 +105,10 @@
             </div>
           </noscript>
 
-          <!-----------------------------TEST-------------------------------------------- -->
-              <svg width="160" height="180">
-                <rect x="30" width="20" fill="steelblue"></rect>
-                <rect x="55" width="20" fill="steelblue"></rect>
-                <rect x="80" width="20" fill="steelblue"></rect>
-                <rect x="105" width="20" fill="steelblue"></rect>
-              </svg>
-              <script>
-                <!-- Our D3 code will go here. -->
-                var ratData = [ 40, 90, 30, 60 ];
 
-                d3.selectAll( "rect" )
-                  .data( ratData )
-                  .attr( "height", function(d){
-                    return d;
-                  });
-              </script> 
+          <!-----------------------------TEST-------------------------------------------- -->
+          <!-- <iframe scrolling="no" width="360" height= "690" src="../Copy-of-tutorial-Map-Chicago.html" style="border:none; " ></iframe>
+          <iframe scrolling="no" width="360" height= "690" src="../Copy-of-tutorial-Map-Chicago.html" style="border:none; " ></iframe> -->
           <!----------------------------TEST--------------------------------------------- -->
 
           <div id='map_canvas'></div>
@@ -122,6 +117,42 @@
         </p>
         </div>
       </div>
+      <!-----------------------------TEST new bs row-------------------------------------------- -->
+      <div class = "row">
+        <div class="well">
+
+        </div>
+        <script>
+          var bscol = document.querySelector('.col-md-8').getBoundingClientRect();
+          var bscolwidth = bscol.right - bscol.left;
+          var zero = 0;
+          document.getElementById('graph').style.width = heartClicks + "px";
+          window.alert(bscolwidth);
+          console.log(bscolwidth);
+        </script>
+        <p>Sample bar graph</p>
+
+        <svg id = 'graph' width=zero1 height="bscolwidth/200">
+          <rect x="30" width="20" fill="steelblue"></rect>
+          <rect x="55" width="20" fill="steelblue"></rect>
+          <rect x="80" width="20" fill="steelblue"></rect>
+          <rect x="105" width="20" fill="steelblue"></rect>
+        </svg>
+        <script>
+          <!-- Our D3 code will go here. -->
+          var ratData = [ 40, 600, 60, 40 ];
+
+          d3.selectAll( "rect" )
+            .data( ratData )
+            .attr( "height", function(d){
+              return d;
+            });
+        </script>
+        <iframe scrolling="no" width="560" height= "690" src="../Copy-of-tutorial-Map-Chicago.html" style="border:none; " ></iframe>
+        <iframe scrolling="no" width="560" height= "690" src="../Copy-of-tutorial-Map-Chicago.html" style="border:none; " ></iframe>
+
+      </div>
+      <!-----------------------------TEST-------------------------------------------- -->
     </div>
 
     <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
@@ -134,10 +165,10 @@
         $(window).resize(function () {
           var h = $(window).height(),
             offsetTop = 105; // Calculate the top offset
-        
+
           $('#map_canvas').css('height', (h - offsetTop));
         }).resize();
-        
+
         $(function() {
           var myMap = new MapsLib({
             fusionTableId:      "1jcd8_Ob6tafgSWveZ-DtlPFuaJrSd2za_irffzqW",
@@ -148,7 +179,7 @@
           });
 
           var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search_address'));
-      
+
           $(':checkbox').click(function(){
             myMap.doSearch();
           });
@@ -156,25 +187,25 @@
           $(':radio').click(function(){
             myMap.doSearch();
           });
-          
+
           $('#search_radius').change(function(){
             myMap.doSearch();
           });
-          
+
           $('#search').click(function(){
             myMap.doSearch();
           });
-          
+
           $('#find_me').click(function(){
-            myMap.findMe(); 
+            myMap.findMe();
             return false;
           });
-          
+
           $('#reset').click(function(){
-            myMap.reset(); 
+            myMap.reset();
             return false;
           });
-          
+
           $(":text").keydown(function(e){
               var key =  e.keyCode ? e.keyCode : e.which;
               if(key === 13) {

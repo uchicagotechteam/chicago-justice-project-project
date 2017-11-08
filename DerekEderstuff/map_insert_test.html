@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>Searchable Map Template Demo</title>
+    <meta charset='utf-8' />
+    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
+    <meta content='' name='description' />
+    <meta content='' name='author' />
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/custom.css"/>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="jquery.js"></script>
+    <script>
+    $(function(){
+      $("#includedContent").load("iframe_test.html");
+      $("#includedContent2").load("map_insert_test.html");
+    });
+    </script>
+  </head>
+  <body>
+    <p>Sample bar graph</p>
+
+    <script>
+      var bscol = document.querySelector('.col-md-8').getBoundingClientRect();
+
+    </script>
+
+    <svg width="160" height="280">
+      <rect x="30" width="20" fill="steelblue"></rect>
+      <rect x="55" width="20" fill="steelblue"></rect>
+      <rect x="80" width="20" fill="steelblue"></rect>
+      <rect x="105" width="20" fill="steelblue"></rect>
+    </svg>
+    <script>
+      <!-- Our D3 code will go here. -->
+      var ratData = [ 40, 90, 580, 60 ];
+
+      d3.selectAll( "rect" )
+        .data( ratData )
+        .attr( "height", function(d){
+          return d;
+        });
+    </script>
+  </body>
+</html>
