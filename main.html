@@ -2,23 +2,64 @@
   <head>
     <title>Justice Project Project</title>
     <link type="text/css" rel="stylesheet" href="static/css/style.css">
+    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="static/js/js.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+  	<script src="https://d3js.org/d3-queue.v2.min.js"></script>
   </head>
   <body>
-    <img class="wrapper" src="static/images/chicago_map.png">
+
 <!--
     <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
     </svg>
+     <img class="wrapper" src="static/images/chicago_map.png">
+     <div id="test" class="overlay">
+     </div>
 -->
-    <div id="test" class="overlay">
-    </div>
+
 <!--
     <div class="chart">
     </div>
   -->
+  <script>
+  var width = 720,
+      height = 500;
+
+var projection = d3.geoAlbers()
+ .scale(70000)
+ .rotate( [87.6057,0] )
+ .center( [0, 41.826] )
+ .translate([width / 2, height / 2]);
+
+var path = d3.geoPath()
+ .projection(projection);
+
+var svg = d3.select("body").append("svg")
+ .attr("width", width)
+ .attr("height", height);
+
+d3.queue()
+     .defer(d3.json, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/chicagotopojson.json") // Load Chicago file
+     .defer(d3.json, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/chicago_rodents.json") // load data file
+     .await(ready); // Run 'ready' when JSONs are loaded
+
+
+// Ready Function, runs when data is loaded
+function ready(error, chicagotopojson, chicago_rodents) { // calls data file
+  if (error) throw error;
+
+  svg.append("g")
+      .attr("class", "ChicagoMap")
+    .selectAll("path")
+      .data(topojson.feature(chicagotopojson, chicagotopojson.objects.ChicagoMap).features) // Bind TopoJSON data elements
+    .enter().append("path")
+      .attr("d", path)
+      .style("fill", "white")
+      .style("stroke", "black");
+}
+  </script>
   </body>
 
 
-  <script src="http://d3js.org/d3.v3.js"></script>
-  <script src="static/js/js.js"></script>
 
 </html>
