@@ -16,17 +16,23 @@ for row in file1reader:
     "Description" : row[6].title(),
     "Community Area" : row[13],
     "Latitude" : row[19],
-    "Longitude" : row[20]
+    "Longitude" : row[20],
+    "geometry" : {
+      "type" : "Point",
+      "coordinates": [row[19], row[20]]
+    }
   })
   counter+=1
   describe = row[6].title()
   if not(describe in descriptions):
     descriptions.append(describe)
-  
 
-print descriptions 
+
+#print descriptions 
 with open("adjustedCrimes.json", 'w') as outfile:
     json.dump(newdata, outfile)
+
+
 #print newdata["crimes"][1:10]
 #with open("crimedata.json") as data_file:
 #    data = json.load(data_file)
