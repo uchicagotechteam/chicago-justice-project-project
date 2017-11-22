@@ -114,60 +114,32 @@
           <div id='map_canvas'></div>
           <p class='pull-right'>
             <a href='http://derekeder.com/searchable_map_template/'>Searchable Map Template</a> by <a href='http://derekeder.com'>Derek Eder</a>.
-        </p>
+          </p>
         </div>
       </div>
       <!-----------------------------TEST new bs row-------------------------------------------- -->
       <div class = "row">
-        <div class="well">
+        <div class='col-md-4'>
 
+          <div class="well">
+            <p>Sample well</p>
+          </div>
         </div>
-        <script>
-          var bscol = document.querySelector('.col-md-8').getBoundingClientRect();
-          var bscolwidth = bscol.right - bscol.left;
-          var zero = 0;
-          document.getElementById('graph').style.width = heartClicks + "px";
-          window.alert(bscolwidth);
-          console.log(bscolwidth);
-        </script>
-        <p>Sample bar graph</p>
-
-        <!-- <svg id = 'graph' width=zero1 height="bscolwidth/200">
-          <rect x="30" width="20" fill="steelblue"></rect>
-          <rect x="55" width="20" fill="steelblue"></rect>
-          <rect x="80" width="20" fill="steelblue"></rect>
-          <rect x="105" width="20" fill="steelblue"></rect>
-        </svg>
-        <script> -->
-          <!-- Our D3 code will go here. -->
-          <!-- var ratData = [ 40, 600, 60, 40 ];
-
-          d3.selectAll( "rect" )
-            .data( ratData )
-            .attr( "height", function(d){
-              return d;
-            });
-        </script> -->
-
-        <!-- <div class='col-md-12'>
-          <iframe frameborder="0"
-          style="overflow:hidden;
-          display:block;-webkit-transform:scale(0.7);-moz-transform-scale(0.7); height: 100%; width: 100%" scrolling="no" src="../Copy-of-tutorial-Map-Chicago.html" style="border:none; " ></iframe>
-        </div> -->
-        <div id="wrapper">
-          <iframe id="scaled-frame" scrolling = "no" src="../Copy-of-tutorial-Map-Chicago.html"></iframe>
+        <div class="col-md-4">
+          <iframe id="scaled-frame" scrolling ="no" src="../Copy-of-tutorial-Map-Chicago.html"></iframe>
+        </div>
+        <div class="col-md-4">
           <iframe id="scaled-frame" scrolling = "no" src="../Copy-of-tutorial-Map-Chicago.html"></iframe>
         </div>
-        <!-- <div id="wrapper">
-          <iframe id="scaled-frame" scrolling = "no" src="../Copy-of-tutorial-Map-Chicago.html"></iframe>
-          <iframe id="scaled-frame" src="../Copy-of-tutorial-Map-Chicago.html"></iframe>
+
+        <!-- <div class="col-md-8">
+          <div id='map_canvas2'></div>
+          <div id="wrapper">
+            <iframe id="scaled-frame" scrolling = "no" src="../Copy-of-tutorial-Map-Chicago.html"></iframe>
+            <iframe id="scaled-frame" scrolling = "no" src="../Copy-of-tutorial-Map-Chicago.html"></iframe>
+          </div>
         </div> -->
 
-        <!-- <div class="col-md-12">
-
-          <iframe scrolling="no" width="560" height= "690" src="../Copy-of-tutorial-Map-Chicago.html" style="border:none; " ></iframe>
-          <iframe scrolling="no" width="560" height= "690" src="../Copy-of-tutorial-Map-Chicago.html" style="border:none; " ></iframe>
-        </div> -->
       </div>
       <!-----------------------------TEST-------------------------------------------- -->
     </div>
@@ -184,6 +156,7 @@
             offsetTop = 105; // Calculate the top offset
 
           $('#map_canvas').css('height', (h - offsetTop));
+          $('#map_canvas2').css('height', (h - offsetTop));
         }).resize();
 
         $(function() {
