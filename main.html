@@ -16,15 +16,18 @@
     <script src="https://d3js.org/d3-queue.v3.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
 
-<div id = "radioButtons">
-    <form action="" id = "radios">
-  <input type="radio" name="crime" value="17" id="radio" checked> 2017<br>
-  <input type="radio" name="crime" value="16" id="radio"> 2016<br>
-  <input type="radio" name="crime" value="15" id="radio"> 2015<br>
-  <input type="radio" name="crime" value="14" id="radio"> 2014<br>
-  <input type="radio" name="crime" value="13" id="radio"> 2013
-</form>
-</div>
+    <div class="page-title"> Chicago Justice Project </div>
+    <div class="page-subtitle"> Hover for number of sexual assaults </div>
+
+    <div id = "radioButtons">
+        <form action="" id = "radios">
+          <input type="radio" name="crime" value="17" id="radio" checked> 2017<br>
+          <input type="radio" name="crime" value="16" id="radio"> 2016<br>
+          <input type="radio" name="crime" value="15" id="radio"> 2015<br>
+          <input type="radio" name="crime" value="14" id="radio"> 2014<br>
+          <input type="radio" name="crime" value="13" id="radio"> 2013
+        </form>
+    </div>
 
 <!--div id="sliderContainer">
     <input id="timeslide" type="range" min="0" max="4" value="0" step="1"/><br>
@@ -84,6 +87,14 @@ function ready(error, chicago_zips_topojson, crimes) {
   });
   //console.log(color(crimeById));
 
+
+  var tooltip = d3.select("body")
+      .append("div")
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("visibility", "hidden")
+      .text("a simple tooltip");
+
   svg.append("g")
       .attr("class", "ChicagoMap")
     .selectAll("path")
@@ -92,15 +103,25 @@ function ready(error, chicago_zips_topojson, crimes) {
       .attr("d", path)
       .style("fill", function(d){
         var value = crimeById[d.properties.zip];
-
         if (value) {
           return color(value);
         } else {
           return "#ffffff";
         }
       })
+      .on("mouseover", function(){
+        return tooltip.style("visibility", "visible");
+      })
+      .on("mousemove", function(d){
+        var value = crimeById[d.properties.zip];
+        return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px").text(value);
+      })
+      .on("mouseout", function(){
+        return tooltip.style("visibility", "hidden");
+      })
       .style("stroke", "black");
 }
+
 
 //d3.select("#radioButtons").on("input", function() {
   //  update(+this.value);
@@ -148,7 +169,18 @@ for (var i=0, len=clicks.length; i<len; i++) {
                   return "#ffffff";
                 }
               })
+              .on("mouseover", function(){
+                return tooltip.style("visibility", "visible");
+              })
+	            .on("mousemove", function(){
+                return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
+              })
+              .on("mouseout", function(){
+                return tooltip.style("visibility", "hidden");
+              })
               .style("stroke", "black");
+
+
         }
         //d3.tsv("https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/crimes" + this.value + ".tsv")
     };
