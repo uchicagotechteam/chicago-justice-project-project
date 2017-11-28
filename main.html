@@ -8,7 +8,7 @@
   </head>
   <body>
 
-    <!--link type="text/css" rel="stylesheet" href="static/css/style.css"-->
+    <link type="text/css" rel="stylesheet" href="static/css/style.css">
     <!--script src="static/js/js.js"></script-->
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-array.v1.min.js"></script>
@@ -16,6 +16,20 @@
     <script src="https://d3js.org/d3-queue.v3.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
 
+<div id = "radioButtons">
+    <form action="" id = "radios">
+  <input type="radio" name="crime" value="17" id="radio" checked> 2017<br>
+  <input type="radio" name="crime" value="16" id="radio"> 2016<br>
+  <input type="radio" name="crime" value="15" id="radio"> 2015<br>
+  <input type="radio" name="crime" value="14" id="radio"> 2014<br>
+  <input type="radio" name="crime" value="13" id="radio"> 2013
+</form>
+</div>
+
+<!--div id="sliderContainer">
+    <input id="timeslide" type="range" min="0" max="4" value="0" step="1"/><br>
+    <span id="range">2017</span>
+</div-->
 <!--
 something something other fill options? in style
     <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
@@ -30,6 +44,7 @@ something something other fill options? in style
     </div>
   -->
   <script>
+  var year = null;
   var width = 720,
       height = 500;
 
@@ -50,13 +65,16 @@ var color = d3.scaleThreshold()
     .domain([0, 25, 100, 200, 300, 400])
     .range(["#ffffff","#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
 
+//year = document.getElementById("radio").value;
+//console.log(year)
+
 d3.queue()
      .defer(d3.json, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/chicago_zips_topojson.json") // Load Chicago file
-     .defer(d3.tsv, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/crimes.tsv") // CHANGE HERE -- ie crimes17
+     .defer(d3.tsv, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/crimes17.tsv" ) // CHANGE HERE -- ie crimes17
      .await(ready); // Run 'ready' when JSONs are loaded
 
 // Ready Function, runs when data is loaded
-function ready(error, chicago_zips_topojson, crimes) { // CHANGE HERE - insert year number ie crimes17
+function ready(error, chicago_zips_topojson, crimes) {
   if (error) throw error;
 
   var crimeById = {};
@@ -83,6 +101,60 @@ function ready(error, chicago_zips_topojson, crimes) { // CHANGE HERE - insert y
       })
       .style("stroke", "black");
 }
+
+//d3.select("#radioButtons").on("input", function() {
+  //  update(+this.value);
+//});
+
+// update the fill of each SVG of class "incident" with value
+// get list of radio buttons with name 'size'
+var clicks = document.getElementById("radios").elements['crime'];
+//console.log(clicks)
+// loop through list
+for (var i=0, len=clicks.length; i<len; i++) {
+    clicks[i].onclick = function() { // assign onclick handler function to each
+        // put clicked radio button's value in total field
+        year=this.value
+        console.log(year)
+
+        d3.queue()
+             .defer(d3.json, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/chicago_zips_topojson.json") // Load Chicago file
+             .defer(d3.tsv, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/crimes" + year + ".tsv" ) // CHANGE HERE -- ie crimes17
+             .await(ready); // Run 'ready' when JSONs are loaded
+
+        // Ready Function, runs when data is loaded
+        function ready(error, chicago_zips_topojson, crimes) { //
+          if (error) throw error;
+
+          var crimeById = {};
+          crimes.forEach(function(d){
+            crimeById[d.Zipcode] = +d.num;
+            //console.log(color(crimeById[d.Zipcode]));
+          });
+          //console.log(color(crimeById));
+
+          svg.append("g")
+              .attr("class", "ChicagoMap")
+            .selectAll("path")
+              .data(topojson.feature(chicago_zips_topojson, chicago_zips_topojson.objects.Zip_Codes).features) // Bind TopoJSON data elements
+            .enter().append("path")
+              .attr("d", path)
+              .style("fill", function(d){
+                var value = crimeById[d.properties.zip];
+
+                if (value) {
+                  return color(value);
+                } else {
+                  return "#ffffff";
+                }
+              })
+              .style("stroke", "black");
+        }
+        //d3.tsv("https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/crimes" + this.value + ".tsv")
+    };
+}
+
+//update();
   </script>
   </body>
 </html>

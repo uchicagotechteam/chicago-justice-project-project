@@ -22,3 +22,8 @@ svg{
 div{
   opacity: 0.7;
 }
+#radioButtons {
+    text-align: center;
+    position: relative;
+    top: 600px;
+}
