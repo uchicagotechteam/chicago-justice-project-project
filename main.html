@@ -52,11 +52,11 @@ var color = d3.scaleThreshold()
 
 d3.queue()
      .defer(d3.json, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/chicago_zips_topojson.json") // Load Chicago file
-     .defer(d3.tsv, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/crimes.tsv") // load data file
+     .defer(d3.tsv, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/crimes.tsv") // CHANGE HERE -- ie crimes17
      .await(ready); // Run 'ready' when JSONs are loaded
 
 // Ready Function, runs when data is loaded
-function ready(error, chicago_zips_topojson, crimes) { // calls data file
+function ready(error, chicago_zips_topojson, crimes) { // CHANGE HERE - insert year number ie crimes17
   if (error) throw error;
 
   var crimeById = {};
