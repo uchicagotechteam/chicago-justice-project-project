@@ -5,9 +5,15 @@ a:hover { color: #4B58A6; }
   max-width: none;
 }
 
-.filter-box { 
-  height: 15px; 
-  width: 15px;  
+#main-nav {
+  -webkit-box-shadow: 0px 5px 10px rgba(100, 100, 100, 0.1);
+  -moz-box-shadow:    0px 5px 10px rgba(100, 100, 100, 0.1);
+  box-shadow:         0px 5px 10px rgba(100, 100, 100, 0.1);
+}
+
+.filter-box {
+  height: 15px;
+  width: 15px;
   display: inline-block;
   *border-right-width: 2px;
   *border-bottom-width: 2px;
@@ -16,7 +22,7 @@ a:hover { color: #4B58A6; }
           border-radius: 5px;
   -webkit-background-clip: padding-box;
      -moz-background-clip: padding;
-          background-clip: padding-box; 
+          background-clip: padding-box;
 }
 
 .filter-yellow { background-color: #FBF358; }
