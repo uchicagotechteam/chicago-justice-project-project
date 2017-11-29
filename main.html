@@ -45,7 +45,7 @@ something something other fill options? in style
   -->
   <script>
   var year = null;
-  var width = 720,
+  var width = 670,
       height = 500;
 
 var projection = d3.geoAlbers()
@@ -62,12 +62,12 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 var color = d3.scaleThreshold()
-    .domain([0, 25, 100, 200, 300, 400])
-    .range(["#ffffff","#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
-
+    .domain([50, 150, 300, 400, 500, 600])
+    //.range(["#ffffff","#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
+    .range(["#b2d4e6","#328ebd","#0072ad","#005b8a","#004467","#0c3557","#002d45"]); 
 //year = document.getElementById("radio").value;
 //console.log(year)
-
+//
 d3.queue()
      .defer(d3.json, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/chicago_zips_topojson.json") // Load Chicago file
      .defer(d3.tsv, "https://raw.githubusercontent.com/uchicagotechteam/chicago-justice-project-project/master/data/crimes17.tsv" ) // CHANGE HERE -- ie crimes17
