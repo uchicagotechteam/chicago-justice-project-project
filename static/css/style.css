@@ -27,3 +27,28 @@ div{
     position: relative;
     top: 50px;
 }
+.page-title{
+  text-align: center;
+  text-decoration: underline;
+  color: #002e4d;
+  background-color: rbga(23, 45, 165, 0.6);
+  font-size: 3vw;
+}
+.page-subtitle{
+  text-align: left;
+  color: #005c99;
+  font-size: 1.3vw;
+  margin-left: 5vw;
+}
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
