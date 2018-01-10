@@ -10,7 +10,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/custom.css"/>
-    <link rel="stylesheet" href="css/style.css"/>
+
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -68,13 +68,18 @@
               <p>Please enable JavaScript to view the map.</p>
             </div>
           </noscript>
+          <h3> Select a year to view its crime data </h3>
           
-          <div class="col-md-6 map1">
+          <div class="col-md-7 map1">
+             <div class="last">
+             </div>
+ 
             <div id="legend1"></div>
-
+            <script src="legend.js"></script>
+          </div>
+          <div class="col-md-4">
             <div id = "radioButtons">
               <form action="" id = "radios">
-                <legend> Select a year to view its crime data </legend>
                 <input type="radio" name="crime" value="17" id="radio" checked> 2017<br>
                 <input type="radio" name="crime" value="16" id="radio"> 2016<br>
                 <input type="radio" name="crime" value="15" id="radio"> 2015<br>
@@ -82,8 +87,10 @@
                 <input type="radio" name="crime" value="13" id="radio"> 2013
               </form>
             </div>
-
+            
             <script src="d3.js"></script>
+            
+            
           </div>
 <!--
           <div class="col-sm-6 map1">
