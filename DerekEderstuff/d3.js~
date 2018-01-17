@@ -1,3 +1,8 @@
+//import legend; //legend //'d3-svg-legend'
+
+
+///////////////////////////////////////////
+
 var width = 670;
 var height = 500;
 
@@ -67,9 +72,8 @@ function ready(error, chicago_zips_topojson, crimes) {
         return tooltip.style("visibility", "visible");
       })
       .on("mousemove", function(d){
-          var value = crimeById[d.properties.zip];
-          var coordinates = d3.mouse(this);
-          return tooltip.style("top", (coordinates[1]-20)+"px").style("left",(coordinates[0]+20)+"px").style("color", 'white').style("background", 'black').style("padding", "4px").text(value);
+        var value = crimeById[d.properties.zip];
+        return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px").text(value);
       })
       .on("mouseout", function(){
         return tooltip.style("visibility", "hidden");
@@ -128,9 +132,8 @@ for (var i=0, len=clicks.length; i<len; i++) {
                 return tooltip.style("visibility", "visible");
               })
 	            .on("mousemove", function(d){
-                        var value = crimeById[d.properties.zip];
-                        var coordinates = d3.mouse(this);
-                return tooltip.style("top", (coordinates[1]-20)+"px").style("left",(coordinates[0]+20)+"px").style("color", 'white').style("background", 'black').style("padding", "4px").text(value);
+                var value = crimeById[d.properties.zip];
+                return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px").text(value);
               })
               .on("mouseout", function(){
                 return tooltip.style("visibility", "hidden");
