@@ -2,7 +2,7 @@ var year = null;
   var width = 670,
       height = 500;
 
-  var w = 300, h = 50;
+  var w = 310, h = 50;
   var key = d3.select("#legend1")
       .append("svg")
       .attr("width", w)
@@ -65,7 +65,7 @@ var y = d3.scaleLinear()
 
 var yAxis = d3.axisBottom()
     .scale(y)
-    .ticks(5);
+    .ticks(9);
 
 key.append("g")
     .attr("class", "y axis")
