@@ -9,8 +9,8 @@ body{
   min-width: 100px;
   min-height: 550px;
   overflow:visible;
+  z-index:-1;
 }
-
 .wrapper {
   position: relative;
 }
@@ -28,11 +28,11 @@ div{
 }
 #radioButtons {
     text-align: left;
-    position: absolute;
+    position: relative;
     margin-bottom: 0px;
     margin-left: 20px;
-    margin-top: 100px;
-    /*z-index:1;*/
+    margin-top: -100px;
+    z-index:1;
 }
 #radioButtons legend {
   margin: 0;
